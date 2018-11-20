@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="01 Cord &amp; 02 Coap" tests="3" errors="0" failures="0" skip="0">
+<testcase classname="01 Cord &amp; 02 Coap.01 Cord" name="Cord Register Should Succeed" time="2">
+</testcase>
+<testcase classname="01 Cord &amp; 02 Coap.02 Coap" name="Recover" time="20">
+</testcase>
+<testcase classname="01 Cord &amp; 02 Coap.02 Coap" name="Timeout" time="100">
+</testcase>
+</testsuite>

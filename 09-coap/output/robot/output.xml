@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.0.4 (Python 3.6.3 on linux)" generated="20181120 17:22:43.687">
+<suite id="s1" name="01 Cord &amp; 02 Coap">
+<suite id="s1-s1" name="01 Cord" source="/tmp/Release-Specs.test/09-coap/01_cord.robot">
+<test id="s1-s1-t1" name="Cord Register Should Succeed">
+<kw name="Run Keywords" library="BuiltIn" type="setup">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>CordEP.connect</arg>
+<arg>CoapRD.connect</arg>
+</arguments>
+<kw name="Connect" library="CordEP">
+<doc>Starts OS host process.</doc>
+<status status="PASS" starttime="20181120 17:22:43.761" endtime="20181120 17:22:43.770"></status>
+</kw>
+<kw name="Connect" library="CoapRD">
+<doc>Starts OS host process.</doc>
+<status status="PASS" starttime="20181120 17:22:43.770" endtime="20181120 17:22:43.778"></status>
+</kw>
+<status status="PASS" starttime="20181120 17:22:43.761" endtime="20181120 17:22:43.778"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>2</arg>
+<arg>Wait for initialization</arg>
+</arguments>
+<msg timestamp="20181120 17:22:45.780" level="INFO">Slept 2 seconds</msg>
+<msg timestamp="20181120 17:22:45.780" level="INFO">Wait for initialization</msg>
+<status status="PASS" starttime="20181120 17:22:43.779" endtime="20181120 17:22:45.781"></status>
+</kw>
+<kw name="Send Recv" library="CordEP">
+<doc>Sends the given text to the host, and expects the given text</doc>
+<arguments>
+<arg>ifconfig 7 add unicast fd00:bbbb::2/64</arg>
+<arg>success:</arg>
+</arguments>
+<status status="PASS" starttime="20181120 17:22:45.781" endtime="20181120 17:22:45.833"></status>
+</kw>
+<kw name="Send Recv" library="CordEP">
+<doc>Sends the given text to the host, and expects the given text</doc>
+<arguments>
+<arg>cord_ep register [fd00:bbbb::1]</arg>
+<arg>registration successful</arg>
+</arguments>
+<status status="PASS" starttime="20181120 17:22:45.833" endtime="20181120 17:22:45.890"></status>
+</kw>
+<kw name="Run Keywords" library="BuiltIn" type="teardown">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>CordEP.disconnect</arg>
+<arg>CoapRD.disconnect</arg>
+</arguments>
+<kw name="Disconnect" library="CordEP">
+<doc>Kill OS host process</doc>
+<status status="PASS" starttime="20181120 17:22:45.891" endtime="20181120 17:22:45.891"></status>
+</kw>
+<kw name="Disconnect" library="CoapRD">
+<doc>Kill OS host process</doc>
+<status status="PASS" starttime="20181120 17:22:45.892" endtime="20181120 17:22:45.892"></status>
+</kw>
+<status status="PASS" starttime="20181120 17:22:45.890" endtime="20181120 17:22:45.892"></status>
+</kw>
+<doc>Register a CoAP endpoint with a CoAP resource directory.</doc>
+<status status="PASS" starttime="20181120 17:22:43.760" endtime="20181120 17:22:45.892" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20181120 17:22:43.735" endtime="20181120 17:22:45.894"></status>
+</suite>
+<suite id="s1-s2" name="02 Coap" source="/tmp/Release-Specs.test/09-coap/02_coap.robot">
+<test id="s1-s2-t1" name="Recover">
+<kw name="Connect" library="CoAP" type="setup">
+<doc>Starts OS host process.</doc>
+<status status="PASS" starttime="20181120 17:22:46.111" endtime="20181120 17:22:46.120"></status>
+</kw>
+<kw name="Send Recv" library="CoAP">
+<doc>Sends the given text to the host, and expects the given text</doc>
+<arguments>
+<arg>ifconfig 6 add unicast fd00:bbbb::2/64</arg>
+<arg>success:</arg>
+</arguments>
+<status status="PASS" starttime="20181120 17:22:46.121" endtime="20181120 17:22:46.433"></status>
+</kw>
+<kw name="Connect" library="RS2">
+<doc>Starts OS host process.</doc>
+<status status="PASS" starttime="20181120 17:22:46.433" endtime="20181120 17:22:46.440"></status>
+</kw>
+<kw name="Send Recv" library="CoAP">
+<doc>Sends the given text to the host, and expects the given text</doc>
+<arguments>
+<arg>coap get -c fd00:bbbb::1 5683 /time</arg>
+<arg>${REGEXP}</arg>
+</arguments>
+<status status="PASS" starttime="20181120 17:22:46.441" endtime="20181120 17:23:06.495"></status>
+</kw>
+<kw name="Disconnect" library="RS2">
+<doc>Kill OS host process</doc>
+<status status="PASS" starttime="20181120 17:23:06.496" endtime="20181120 17:23:06.496"></status>
+</kw>
+<kw name="Disconnect" library="CoAP" type="teardown">
+<doc>Kill OS host process</doc>
+<status status="PASS" starttime="20181120 17:23:06.497" endtime="20181120 17:23:06.497"></status>
+</kw>
+<doc>Send confirmable GET and recover from 2 unanswered requests.</doc>
+<status status="PASS" starttime="20181120 17:22:46.110" endtime="20181120 17:23:06.497" critical="yes"></status>
+</test>
+<test id="s1-s2-t2" name="Timeout">
+<kw name="Connect" library="CoAP" type="setup">
+<doc>Starts OS host process.</doc>
+<status status="PASS" starttime="20181120 17:23:06.499" endtime="20181120 17:23:06.608"></status>
+</kw>
+<kw name="Send Recv" library="CoAP">
+<doc>Sends the given text to the host, and expects the given text</doc>
+<arguments>
+<arg>ifconfig 6 add unicast fd00:bbbb::2/64</arg>
+<arg>success:</arg>
+</arguments>
+<status status="PASS" starttime="20181120 17:23:06.610" endtime="20181120 17:23:06.799"></status>
+</kw>
+<kw name="Connect" library="RS5">
+<doc>Starts OS host process.</doc>
+<status status="PASS" starttime="20181120 17:23:06.800" endtime="20181120 17:23:06.805"></status>
+</kw>
+<kw name="Run Keyword And Expect Error" library="BuiltIn">
+<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<arguments>
+<arg>TIMEOUT*</arg>
+<arg>CoAP.send recv</arg>
+<arg>coap get -c fd00:bbbb::1 5683 /time</arg>
+<arg>${REGEXP}</arg>
+</arguments>
+<kw name="Send Recv" library="CoAP">
+<doc>Sends the given text to the host, and expects the given text</doc>
+<arguments>
+<arg>coap get -c fd00:bbbb::1 5683 /time</arg>
+<arg>${REGEXP}</arg>
+</arguments>
+<msg timestamp="20181120 17:24:46.889" level="FAIL">TIMEOUT: Timeout exceeded.
+&lt;pexpect.pty_spawn.spawn object at 0x7fb58bd283c8&gt;
+command: /usr/bin/make
+args: ['/usr/bin/make', 'term']
+buffer (last 100 chars): b':bbbb::1 5683 /time\r\r\ngcoap_cli: sending msg ID 49584, 11 bytes\r\n&gt; gcoap: timeout for msg ID 49584\r\n'
+before (last 100 chars): b':bbbb::1 5683 /time\r\r\ngcoap_cli: sending msg ID 49584, 11 bytes\r\n&gt; gcoap: timeout for msg ID 49584\r\n'
+after: &lt;class 'pexpect.exceptions.TIMEOUT'&gt;
+match: None
+match_index: None
+exitstatus: None
+flag_eof: False
+pid: 8861
+child_fd: 8
+closed: False
+timeout: 100
+delimiter: &lt;class 'pexpect.exceptions.EOF'&gt;
+logfile: None
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile(b'\\d+-\\d+-\\d+ \\d+:\\d')</msg>
+<status status="FAIL" starttime="20181120 17:23:06.807" endtime="20181120 17:24:46.889"></status>
+</kw>
+<status status="PASS" starttime="20181120 17:23:06.806" endtime="20181120 17:24:46.891"></status>
+</kw>
+<kw name="Disconnect" library="RS5">
+<doc>Kill OS host process</doc>
+<status status="PASS" starttime="20181120 17:24:46.891" endtime="20181120 17:24:46.891"></status>
+</kw>
+<kw name="Disconnect" library="CoAP" type="teardown">
+<doc>Kill OS host process</doc>
+<status status="PASS" starttime="20181120 17:24:46.892" endtime="20181120 17:24:46.892"></status>
+</kw>
+<doc>Send confirmable GET and expect timeout error after several retries.</doc>
+<status status="PASS" starttime="20181120 17:23:06.498" endtime="20181120 17:24:46.892" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20181120 17:22:46.096" endtime="20181120 17:24:46.894"></status>
+</suite>
+<status status="PASS" starttime="20181120 17:22:43.689" endtime="20181120 17:24:47.098"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0">Critical Tests</stat>
+<stat pass="3" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="3" fail="0" id="s1" name="01 Cord &amp; 02 Coap">01 Cord &amp; 02 Coap</stat>
+<stat pass="1" fail="0" id="s1-s1" name="01 Cord">01 Cord &amp; 02 Coap.01 Cord</stat>
+<stat pass="2" fail="0" id="s1-s2" name="02 Coap">01 Cord &amp; 02 Coap.02 Coap</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
