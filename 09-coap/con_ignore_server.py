@@ -15,7 +15,7 @@ Usage:
     optional arguments:
       -h, --help  show this help message and exit
       -i IGNORES  count of requests to ignore
-      
+
 Example:
 
 Ignores initial request and first retry. Responds on second retry.
@@ -44,7 +44,7 @@ class ConIgnoreServer(object):
             else:
                 resource.type  = 'string'
                 now = datetime.datetime.now()
-                resource.value = now.strftime("%Y-%m-%d %H:%M").encode('ascii')
+                resource.value = str(now.strftime("%Y-%m-%d %H:%M").encode('ascii'))
         else:
             raise NotImplementedError('Unknown path')
             return
@@ -62,5 +62,3 @@ if __name__ == '__main__':
 
     server = ConIgnoreServer(args.ignores)
     server.start()
-
-
